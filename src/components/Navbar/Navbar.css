@@ -1,0 +1,29 @@
+.navbar {
+    height: 80px;
+    border-bottom: 1px solid #282742;
+    padding: 0px 10px;
+}
+.navbar .navbar__logo {
+    width: 200px;
+}
+.navbar .navbar__right {
+    color:white;
+}
+.navbar .navbar__right  img {
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+}
+.navbar .navbar__right .navbar__right--icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all .3s;
+    cursor: pointer;
+}
+.navbar .navbar__right .navbar__right--icon:hover {
+    background-color: rgba(255,255,255,0.3);
+}

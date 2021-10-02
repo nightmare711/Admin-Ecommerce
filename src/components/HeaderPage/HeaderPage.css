@@ -1,0 +1,19 @@
+.header-page {
+    font-size: 24px;
+    font-weight: 600;
+}
+.title {
+    font-size: 24px;
+    font-weight: 600;
+}
+.header-page .route {
+    font-size: 15px;
+    font-weight: 500;
+}
+.header-page .route .route__extend {
+    margin-right:10px;
+}
+.header-page .route .route__main {
+    color: var(--text-hover);
+    margin-left: 10px;
+}

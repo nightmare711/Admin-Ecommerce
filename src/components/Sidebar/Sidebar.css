@@ -1,0 +1,24 @@
+.sidebar {
+
+}
+.sidebar .sidebar__list {
+
+}
+.sidebar .sidebar__link {
+
+}
+.sidebar .sidebar__link a {
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 400;
+    padding:20px 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition:all .3s;
+}
+.sidebar .sidebar__link a:hover {
+    color: var(--text-hover);
+}
