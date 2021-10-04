@@ -1,3 +1,5 @@
 export * from './Navbar/Navbar'
 export * from './Sidebar/Sidebar'
 export * from './HeaderPage/HeaderPage'
+export * from './Chartbar/Chartbar'
+export * from './DoughnutChart/DoughnutChart'
