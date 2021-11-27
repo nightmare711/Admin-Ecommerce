@@ -2,9 +2,11 @@ import React from 'react'
 import Logo from 'assets/logo.png'
 import SearchIcon from '@mui/icons-material/Search'
 import NotificationsIcon from '@mui/icons-material/Notifications'
+import { useLogout } from 'services/authenticate'
 import './Navbar.css'
 
 export const Navbar = () => {
+	const logout = useLogout()
 	return (
 		<div className='flex flex-row items-center justify-between w-full max-w-screen-xl navbar'>
 			<img className='navbar__logo' src={Logo} alt='Logo' />
@@ -15,7 +17,15 @@ export const Navbar = () => {
 				<div className='mr-8 navbar__right--icon'>
 					<NotificationsIcon />
 				</div>
-				<img src='https://picsum.photos/200' alt='Avatar' />
+				<div className='relative account-container'>
+					<img src='https://picsum.photos/200' alt='Avatar' />
+					<div className='pt-7 account'>
+						<ul className='account-list'>
+							<li>Profile</li>
+							<li onClick={() => logout()}>Logout</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	)

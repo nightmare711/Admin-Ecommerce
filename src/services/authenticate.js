@@ -92,3 +92,10 @@ export const useRegister = () => {
 			.catch((err) => toast.error(err.message))
 	}
 }
+export const useLogout = () => {
+	const data = React.useContext(DataContext)
+	return () => {
+		data.setUser(null)
+		toast.success('Logout successful')
+	}
+}
