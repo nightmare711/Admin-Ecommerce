@@ -1,29 +1,75 @@
 import { Switch, Route } from 'react-router-dom'
-import { Signin as SigninPage, Dashboard as DasboardPage } from 'pages'
+import {
+	Signin as SigninPage,
+	Signup as SignupPage,
+	Dashboard as DashboardPage,
+	Products as ProductsPage,
+} from 'pages'
+import { DataContext } from 'context/DataContext'
 import { Navbar, Sidebar } from 'components'
+import { ToastContainer } from 'react-toastify'
 import React from 'react'
+import 'react-toastify/dist/ReactToastify.css'
 function App() {
-	if (false) {
+	const data = React.useContext(DataContext)
+	if (!data.user) {
 		return (
-			<div className='flex flex-row h-full App'>
-				<div className='flex flex-col flex-1'>
-					<Switch>
-						<Route component={SigninPage} />
-					</Switch>
+			<>
+				<div className='flex flex-row h-full App'>
+					<div className='flex flex-col flex-1'>
+						<Switch>
+							<Route component={SignupPage} exact path='/signup' />
+							<Route component={SigninPage} />
+						</Switch>
+					</div>
 				</div>
-			</div>
+				<ToastContainer
+					position='bottom-right'
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+				/>
+			</>
 		)
 	}
 	return (
-		<div className='flex flex-row justify-center h-full App'>
-			<div className='flex flex-col flex-1 h-full max-w-screen-xl app__width'>
-				<Navbar />
-				<Sidebar />
-				<Switch>
-					<Route path='/dashboard' component={DasboardPage} />
-				</Switch>
+		<>
+			<div className='flex flex-row justify-center h-full App'>
+				<div className='flex flex-col flex-1 h-full max-w-screen-xl app__width'>
+					<Navbar />
+					<Sidebar />
+					<Switch>
+						<Route path='/products' component={ProductsPage} />
+						<Route path='/dashboard' component={DashboardPage} />
+					</Switch>
+					<div
+						style={{ fontSize: '14px' }}
+						className='flex items-center justify-center my-4 text-center'
+					>
+						Copyright © 2021{' '}
+						<span style={{ color: '#52409B' }} className='ml-2'>
+							WastedLands
+						</span>
+					</div>
+				</div>
 			</div>
-		</div>
+			<ToastContainer
+				position='bottom-right'
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
+		</>
 	)
 }
 

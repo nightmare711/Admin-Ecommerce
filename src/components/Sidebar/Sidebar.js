@@ -7,12 +7,12 @@ const listSidebar = [
 	{
 		title: 'Dashboard',
 		icons: <DashboardIcon />,
-		to: '/',
+		to: '/dashboard',
 	},
 	{
-		title: 'Customer',
+		title: 'Products',
 		icons: <PersonIcon />,
-		to: '/',
+		to: '/products',
 	},
 ]
 

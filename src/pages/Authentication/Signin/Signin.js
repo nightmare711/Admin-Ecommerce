@@ -1,9 +1,18 @@
 import React from 'react'
-import Logo from 'assets/logo.png'
 import { TextField, Button } from '@material-ui/core'
+import { useLogin } from 'services/authenticate'
 import './Signin.css'
 
 export const Signin = () => {
+	const login = useLogin()
+	const [info, setInfo] = React.useState({
+		username: '',
+		password: '',
+	})
+	const [error, setError] = React.useState({
+		username: false,
+		password: false,
+	})
 	return (
 		<div className='flex flex-row w-full h-full sign-in'>
 			<img
@@ -22,21 +31,47 @@ export const Signin = () => {
 					<span>Please sign in to continue.</span>
 					<TextField
 						style={{ flex: 1, marginTop: '20px' }}
-						className='w-full'
+						className='w-full username-input'
 						id='filled-basic'
 						label='Email'
 						variant='filled'
 						color='secondary'
+						error={error.username}
+						onChange={(e) => setInfo({ ...info, username: e.target.value })}
 					/>
 					<TextField
 						style={{ flex: 1, marginTop: '20px' }}
-						className='w-full'
+						className='w-full username-input'
 						id='filled-basic'
 						label='Password'
 						variant='filled'
 						color='secondary'
+						error={error.password}
+						onChange={(e) => setInfo({ ...info, password: e.target.value })}
 					/>
-					<Button size='large' style={{ marginTop: '20px' }} variant='contained' color='primary'>
+					<Button
+						onClick={() => {
+							var errorTemp = error
+							if (!info.username) {
+								errorTemp = { ...errorTemp, username: true }
+							} else {
+								errorTemp = { ...error, username: false }
+							}
+							if (!info.password) {
+								errorTemp = { ...errorTemp, password: true }
+							} else {
+								errorTemp = { ...errorTemp, password: false }
+							}
+							setError(errorTemp)
+							if (!errorTemp.username && !errorTemp.password) {
+								login(info)
+							}
+						}}
+						size='large'
+						style={{ marginTop: '20px' }}
+						variant='contained'
+						color='primary'
+					>
 						Sign in
 					</Button>
 					<span className='my-4 text-sm font-bold cursor-pointer'>Forget your account?</span>

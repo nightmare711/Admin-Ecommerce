@@ -1,0 +1,15 @@
+.products {
+    padding: 10px;
+    background-color: var(--bg-page);
+}
+.products table {
+    margin: 40px 0px;
+    width: 100%;
+}
+.products tr {
+    transition: all .3s;
+    cursor: pointer;
+}
+.products tr:hover {
+    background-color: #282842;
+}

@@ -1,8 +1,12 @@
 import React from 'react'
-import { HeaderPage } from 'components'
+import { HeaderPage, HorizontalBarChart, DoughnutChart } from 'components'
 import LinearProgress from '@mui/material/LinearProgress'
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
-import { HorizontalBarChart, DoughnutChart } from 'components'
+import {
+	useGetHighestPrice,
+	useGetHighestTotalSupply,
+	useGetMostBoughtProduct,
+} from 'queries/useProducts.queries'
 import {
 	ImportExport as ExportIcon,
 	FilterAlt as FilterIcon,
@@ -10,7 +14,152 @@ import {
 } from '@mui/icons-material'
 import './Dashboard.css'
 
+export const topUserTemp = [
+	{
+		name: 'Socrates Itumay',
+		total: 12000,
+		avatar: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Socrates Itumay',
+		total: 12000,
+		avatar: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Socrates Itumay',
+		total: 12000,
+	},
+	{
+		name: 'Socrates Itumay',
+		total: 12000,
+		avatar: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Socrates Itumay',
+		total: 12000,
+		avatar: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Socrates Itumay',
+		total: 12000,
+	},
+	{
+		name: 'Socrates Itumay',
+		total: 12000,
+		avatar: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Socrates Itumay',
+		total: 12000,
+		avatar: 'https://picsum.photos/200',
+	},
+]
+export const topProductTemp = [
+	{
+		name: 'Laptop ASUS VivoBook X413JA',
+		total: 120,
+		image: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Laptop ASUS VivoBook X413JA',
+		total: 120,
+		image: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Laptop ASUS VivoBook X413JA',
+		total: 120,
+		image: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Laptop ASUS VivoBook X413JA',
+		total: 120,
+		image: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Laptop ASUS VivoBook X413JA',
+		total: 120,
+		image: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Laptop ASUS VivoBook X413JA',
+		total: 120,
+		image: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Laptop ASUS VivoBook X413JA',
+		total: 120,
+		image: 'https://picsum.photos/200',
+	},
+	{
+		name: 'Laptop ASUS VivoBook X413JA',
+		total: 120,
+		image: 'https://picsum.photos/200',
+	},
+]
+
+const summary = [
+	{
+		clientName: 'Tran Hoang',
+		productId: 12,
+		productName: 'Laptop ASUS VivoBook X413JA',
+		productCost: '2000',
+		paymentMode: 'Online Payment',
+		status: 0,
+	},
+	{
+		clientName: 'Tran Hoang',
+		productId: 12,
+		productName: 'Laptop ASUS VivoBook X413JA',
+		productCost: '2000',
+		paymentMode: 'Online Payment',
+		status: 2,
+	},
+	{
+		clientName: 'Tran Hoang',
+		productId: 12,
+		productName: 'Laptop ASUS VivoBook X413JA',
+		productCost: '2000',
+		paymentMode: 'Online Payment',
+		status: 0,
+	},
+	{
+		clientName: 'Tran Hoang',
+		productId: 12,
+		productName: 'Laptop ASUS VivoBook X413JA',
+		productCost: '2000',
+		paymentMode: 'Online Payment',
+		status: 2,
+	},
+	{
+		clientName: 'Tran Hoang',
+		productId: 12,
+		productName: 'Laptop ASUS VivoBook X413JA',
+		productCost: '2000',
+		paymentMode: 'Online Payment',
+		status: 1,
+	},
+	{
+		clientName: 'Tran Hoang',
+		productId: 12,
+		productName: 'Laptop ASUS VivoBook X413JA',
+		productCost: '2000',
+		paymentMode: 'Online Payment',
+		status: 2,
+	},
+	{
+		clientName: 'Tran Hoang',
+		productId: 12,
+		productName: 'Laptop ASUS VivoBook X413JA',
+		productCost: '2000',
+		paymentMode: 'Online Payment',
+		status: 2,
+	},
+]
+
 export const Dashboard = () => {
+	const { data: mostProduct } = useGetMostBoughtProduct()
+	const { data: highestPrice } = useGetHighestPrice()
+	const { data: highesSupply } = useGetHighestTotalSupply()
 	return (
 		<div className='dashboard'>
 			<div className='flex flex-row items-center justify-between dashboard__header'>
@@ -102,6 +251,107 @@ export const Dashboard = () => {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div className='card__top'>
+				<div className='card__custom'>
+					<span className='title'>Most Bought Products</span>
+					<span className='block sub-title'>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+					</span>
+					<ul className='custom__list'>
+						{mostProduct?.map((product, key) => (
+							<li className='flex flex-row custom__list--item' key={key}>
+								<div className='flex flex-row items-center'>
+									<img src={product.image} alt='Product' />
+									<div className='flex flex-col ml-4 mr-2'>
+										<span className='title'>{product.name}</span>
+										<span className='subtitle'>Product's Name</span>
+									</div>
+								</div>
+								<div style={{ minWidth: '80px' }} className='flex flex-col'>
+									<span className='title'>{product.price}</span>
+									<span className='subtitle'>Price Product</span>
+								</div>
+							</li>
+						))}
+					</ul>
+				</div>
+				<div className='card__custom'>
+					<span className='title'>Highest Price Products</span>
+					<span className='block sub-title'>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+					</span>
+					<ul className='custom__list'>
+						{highestPrice?.map((product, key) => (
+							<li className='flex flex-row custom__list--item' key={key}>
+								<div className='flex flex-row items-center'>
+									<img src={product.image} alt='Product' />
+									<div className='flex flex-col ml-4 mr-2'>
+										<span className='title'>{product.name}</span>
+										<span className='subtitle'>Product's Name</span>
+									</div>
+								</div>
+								<div style={{ minWidth: '80px' }} className='flex flex-col'>
+									<span className='title'>{product.price}</span>
+									<span className='subtitle'>Price Product</span>
+								</div>
+							</li>
+						))}
+					</ul>
+				</div>
+				<div className='card__custom'>
+					<span className='title'>Highest Supply Products</span>
+					<span className='block sub-title'>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+					</span>
+					<ul className='custom__list'>
+						{highesSupply?.map((product, key) => (
+							<li className='flex flex-row custom__list--item' key={key}>
+								<div className='flex flex-row items-center'>
+									<img src={product.image} alt='Product' />
+									<div className='flex flex-col ml-4 mr-2'>
+										<span className='title'>{product.name}</span>
+										<span className='subtitle'>Product's Name</span>
+									</div>
+								</div>
+								<div style={{ minWidth: '80px' }} className='flex flex-col'>
+									<span className='title'>{product.bought}</span>
+									<span className='subtitle'>Total Product</span>
+								</div>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
+			<div className='summary'>
+				<span className='title'>Product Summary</span>
+				<span className='subtitle'>
+					Lorem Ipsum is simply dummy text of the printing and typesetting.
+				</span>
+				<table>
+					<thead>
+						<tr>
+							<th>#NO</th>
+							<th>Client Name</th>
+							<th>Product ID</th>
+							<th>Product</th>
+							<th>Cost</th>
+							<th>Payment Mode</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					{summary.map((sum, index) => (
+						<tr key={index}>
+							<td>{index + 1}</td>
+							<td>{sum.clientName}</td>
+							<td>{sum.productId}</td>
+							<td>{sum.productName}</td>
+							<td>{sum.productCost}</td>
+							<td>{sum.paymentMode}</td>
+							<td>{sum.status}</td>
+						</tr>
+					))}
+				</table>
 			</div>
 		</div>
 	)

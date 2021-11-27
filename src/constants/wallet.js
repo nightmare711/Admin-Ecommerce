@@ -1,0 +1,2 @@
+export const METAMASK = 'METAMASK'
+export const WALLETCONNECT = 'WALLETCONNECT'
