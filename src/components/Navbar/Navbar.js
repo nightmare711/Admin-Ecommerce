@@ -3,6 +3,7 @@ import Logo from 'assets/logo.png'
 import SearchIcon from '@mui/icons-material/Search'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import { useLogout } from 'services/authenticate'
+import { Link } from 'react-router-dom'
 import './Navbar.css'
 
 export const Navbar = () => {
@@ -21,7 +22,9 @@ export const Navbar = () => {
 					<img src='https://picsum.photos/200' alt='Avatar' />
 					<div className='pt-7 account'>
 						<ul className='account-list'>
-							<li>Profile</li>
+							<Link to='/profile'>
+								<li>Profile</li>
+							</Link>
 							<li onClick={() => logout()}>Logout</li>
 						</ul>
 					</div>

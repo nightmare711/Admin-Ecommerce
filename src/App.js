@@ -4,6 +4,7 @@ import {
 	Signup as SignupPage,
 	Dashboard as DashboardPage,
 	Products as ProductsPage,
+	Profile as ProfilePage,
 } from 'pages'
 import { DataContext } from 'context/DataContext'
 import { Navbar, Sidebar } from 'components'
@@ -46,6 +47,7 @@ function App() {
 					<Switch>
 						<Route path='/products' component={ProductsPage} />
 						<Route path='/dashboard' component={DashboardPage} />
+						<Route path='/profile' component={ProfilePage} />
 					</Switch>
 					<div
 						style={{ fontSize: '14px' }}

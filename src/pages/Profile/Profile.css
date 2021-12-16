@@ -1,0 +1,99 @@
+.profile__container {
+  margin: auto;
+  text-align: center;
+}
+
+.profile__top {
+  height: 500px;
+  padding: 50px 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
+    url("https://wallpaperaccess.com/full/889305.jpg");
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+.profile__img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: auto;
+}
+.email {
+  display: flex;
+  justify-content: space-between;
+}
+.profile__name {
+  font-size: 40px;
+}
+.email {
+  padding: 10px 360px;
+  font-size: 20px;
+  color: rgb(160, 149, 149);
+}
+.user__bio {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: rgb(160, 149, 149);
+}
+.joined__date {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: rgb(160, 149, 149);
+}
+.statistical {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 300px;
+}
+.statistical .number {
+  font-size: 20px;
+}
+.statistical .text {
+  font-size: 20px;
+  color: rgb(160, 149, 149);
+}
+.profile__detail .title {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+label {
+  font-size: 20px;
+}
+.user__form .user__input,
+textarea {
+  width: 100%;
+  padding: 7px;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 3px solid white;
+  margin-bottom: 20px;
+}
+.user__form .social__input {
+  width: 95%;
+  padding: 7px 0;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 3px solid white;
+}
+.social {
+  margin-bottom: 30px;
+}
+.social__icon {
+  margin-right: 25px;
+}
+.save {
+  padding: 10px 100px;
+  background-color: transparent;
+  color: white;
+  font-weight: 600;
+  border-radius: 30px;
+  border: 1px solid white;
+  font-size: 20px;
+  cursor: pointer;
+}
+.save:hover {
+  background-color: white;
+  border: 1px solid transparent;
+  color: black;
+}
