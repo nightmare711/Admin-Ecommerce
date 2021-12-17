@@ -179,7 +179,13 @@ export const Dashboard = () => {
 						Export
 					</div>
 					{isConnect ? (
-						<div className={`btn-secondary ${totalFund ? 'disabled' : ''}`}>
+						<div
+							onClick={async () => {
+								await requestWithdraw()
+								refetchGetFund()
+							}}
+							className={`btn-secondary ${totalFund === 0 ? 'disabled' : ''}`}
+						>
 							Withdraw: {totalFund || 0}
 						</div>
 					) : (

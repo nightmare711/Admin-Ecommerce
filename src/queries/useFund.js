@@ -44,6 +44,9 @@ export const useGetTotalInFund = () => {
 	return useQuery(['useGetTotalInFund.name'], async () => {
 		const wawContract = getContract(WFABI, WF_ADDRESS)
 		const total = await wawContract.methods.seller(window.ethereum?.selectedAddress).call()
-		return total
+		if (total) {
+			return total * 10 ** -18
+		}
+		return 0
 	})
 }

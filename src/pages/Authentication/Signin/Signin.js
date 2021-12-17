@@ -1,5 +1,6 @@
 import React from 'react'
 import { TextField, Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import { useLogin } from 'services/authenticate'
 import './Signin.css'
 
@@ -75,7 +76,9 @@ export const Signin = () => {
 					>
 						Sign in
 					</Button>
-					<span className='my-4 text-sm font-bold cursor-pointer'>Forget your account?</span>
+					<Link to='/signup' className='my-4 text-sm font-bold cursor-pointer'>
+						Do not have account?
+					</Link>
 				</div>
 			</div>
 		</div>
