@@ -7,11 +7,12 @@ import {
 	useGetHighestTotalSupply,
 	useGetMostBoughtProduct,
 } from 'queries/useProducts.queries'
-import {
-	ImportExport as ExportIcon,
-	FilterAlt as FilterIcon,
-	BarChart as BarChartIcon,
-} from '@mui/icons-material'
+import { ImportExport as ExportIcon, BarChart as BarChartIcon } from '@mui/icons-material'
+import { useCheckConnected, useConnectWallet } from 'services/useWalletProviders'
+import { useGetTotalInFund, useWithdraw } from 'queries/useFund'
+import { useGetOrderByOwner } from 'queries/useOrder'
+import { onMoveAnimation } from 'services/useDevelopUI'
+import { OrderOverlay } from 'components'
 import './Dashboard.css'
 
 export const topUserTemp = [
@@ -97,71 +98,79 @@ export const topProductTemp = [
 	},
 ]
 
-const summary = [
-	{
-		clientName: 'Tran Hoang',
-		productId: 12,
-		productName: 'Laptop ASUS VivoBook X413JA',
-		productCost: '2000',
-		paymentMode: 'Online Payment',
-		status: 0,
-	},
-	{
-		clientName: 'Tran Hoang',
-		productId: 12,
-		productName: 'Laptop ASUS VivoBook X413JA',
-		productCost: '2000',
-		paymentMode: 'Online Payment',
-		status: 2,
-	},
-	{
-		clientName: 'Tran Hoang',
-		productId: 12,
-		productName: 'Laptop ASUS VivoBook X413JA',
-		productCost: '2000',
-		paymentMode: 'Online Payment',
-		status: 0,
-	},
-	{
-		clientName: 'Tran Hoang',
-		productId: 12,
-		productName: 'Laptop ASUS VivoBook X413JA',
-		productCost: '2000',
-		paymentMode: 'Online Payment',
-		status: 2,
-	},
-	{
-		clientName: 'Tran Hoang',
-		productId: 12,
-		productName: 'Laptop ASUS VivoBook X413JA',
-		productCost: '2000',
-		paymentMode: 'Online Payment',
-		status: 1,
-	},
-	{
-		clientName: 'Tran Hoang',
-		productId: 12,
-		productName: 'Laptop ASUS VivoBook X413JA',
-		productCost: '2000',
-		paymentMode: 'Online Payment',
-		status: 2,
-	},
-	{
-		clientName: 'Tran Hoang',
-		productId: 12,
-		productName: 'Laptop ASUS VivoBook X413JA',
-		productCost: '2000',
-		paymentMode: 'Online Payment',
-		status: 2,
-	},
-]
+// const summary = [
+// 	{
+// 		clientName: 'Tran Hoang',
+// 		productId: 12,
+// 		productName: 'Laptop ASUS VivoBook X413JA',
+// 		productCost: '2000',
+// 		paymentMode: 'Online Payment',
+// 		status: 0,
+// 	},
+// 	{
+// 		clientName: 'Tran Hoang',
+// 		productId: 12,
+// 		productName: 'Laptop ASUS VivoBook X413JA',
+// 		productCost: '2000',
+// 		paymentMode: 'Online Payment',
+// 		status: 2,
+// 	},
+// 	{
+// 		clientName: 'Tran Hoang',
+// 		productId: 12,
+// 		productName: 'Laptop ASUS VivoBook X413JA',
+// 		productCost: '2000',
+// 		paymentMode: 'Online Payment',
+// 		status: 0,
+// 	},
+// 	{
+// 		clientName: 'Tran Hoang',
+// 		productId: 12,
+// 		productName: 'Laptop ASUS VivoBook X413JA',
+// 		productCost: '2000',
+// 		paymentMode: 'Online Payment',
+// 		status: 2,
+// 	},
+// 	{
+// 		clientName: 'Tran Hoang',
+// 		productId: 12,
+// 		productName: 'Laptop ASUS VivoBook X413JA',
+// 		productCost: '2000',
+// 		paymentMode: 'Online Payment',
+// 		status: 1,
+// 	},
+// 	{
+// 		clientName: 'Tran Hoang',
+// 		productId: 12,
+// 		productName: 'Laptop ASUS VivoBook X413JA',
+// 		productCost: '2000',
+// 		paymentMode: 'Online Payment',
+// 		status: 2,
+// 	},
+// 	{
+// 		clientName: 'Tran Hoang',
+// 		productId: 12,
+// 		productName: 'Laptop ASUS VivoBook X413JA',
+// 		productCost: '2000',
+// 		paymentMode: 'Online Payment',
+// 		status: 2,
+// 	},
+// ]
 
 export const Dashboard = () => {
 	const { data: mostProduct } = useGetMostBoughtProduct()
 	const { data: highestPrice } = useGetHighestPrice()
 	const { data: highesSupply } = useGetHighestTotalSupply()
+	const { data: orders } = useGetOrderByOwner()
+	const [infoOrder, setInfoOrder] = React.useState(null)
+	const { data: totalFund, refetch: refetchGetFund } = useGetTotalInFund()
+	const requestWithdraw = useWithdraw()
+	const connect = useConnectWallet()
+	const isConnect = useCheckConnected()
+
 	return (
 		<div className='dashboard'>
+			<OrderOverlay order={infoOrder} />
 			<div className='flex flex-row items-center justify-between dashboard__header'>
 				<HeaderPage title='Dashboard' route='Dashboard' />
 				<div className='flex flex-row items-center btn-container'>
@@ -169,10 +178,15 @@ export const Dashboard = () => {
 						<ExportIcon />
 						Export
 					</div>
-					<div className='btn-secondary'>
-						<FilterIcon />
-						Filter
-					</div>
+					{isConnect ? (
+						<div className={`btn-secondary ${totalFund ? 'disabled' : ''}`}>
+							Withdraw: {totalFund || 0}
+						</div>
+					) : (
+						<div onClick={() => connect()} className='btn-secondary'>
+							Connect
+						</div>
+					)}
 				</div>
 			</div>
 			<div className='dashboard__card'>
@@ -332,23 +346,29 @@ export const Dashboard = () => {
 					<thead>
 						<tr>
 							<th>#NO</th>
-							<th>Client Name</th>
-							<th>Product ID</th>
-							<th>Product</th>
-							<th>Cost</th>
+							<th>Name</th>
+							<th>Address</th>
+							<th>Country</th>
+							<th>Total Price</th>
 							<th>Payment Mode</th>
-							<th>Status</th>
+							<th>Quantity</th>
 						</tr>
 					</thead>
-					{summary.map((sum, index) => (
-						<tr key={index}>
+					{orders?.map((sum, index) => (
+						<tr
+							onClick={() => {
+								setInfoOrder(sum)
+								onMoveAnimation('order-overlay', 'moveInOpacity')
+							}}
+							key={index}
+						>
 							<td>{index + 1}</td>
-							<td>{sum.clientName}</td>
-							<td>{sum.productId}</td>
-							<td>{sum.productName}</td>
-							<td>{sum.productCost}</td>
-							<td>{sum.paymentMode}</td>
-							<td>{sum.status}</td>
+							<td>{sum.lastName}</td>
+							<td>{sum.address}</td>
+							<td>{sum.country}</td>
+							<td>{sum.price * sum.count}</td>
+							<td style={{ textTransform: 'uppercase' }}>{sum.payment}</td>
+							<td>{sum.count}</td>
 						</tr>
 					))}
 				</table>

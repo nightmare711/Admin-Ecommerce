@@ -6,9 +6,10 @@ import { onMoveAnimation } from 'services/useDevelopUI'
 import SendIcon from '@mui/icons-material/Send'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { toBase64 } from 'services/utils/utils'
+import { useDeleteProduct } from 'queries/useProducts.queries'
 import { toast } from 'react-toastify'
 
-export const EditProduct = ({ info }) => {
+export const EditProduct = ({ info, refetch }) => {
 	const [infoProduct, setInfoProduct] = React.useState({
 		name: '',
 		product_type: '',
@@ -47,6 +48,7 @@ export const EditProduct = ({ info }) => {
 		onMoveAnimation('edit-product', 'moveOutOpacity')
 	}
 	const onEditProduct = useEditProduct(onClose)
+	const onDeleteProduct = useDeleteProduct()
 	const onValidate = () => {
 		var errorTemp = error
 		if (infoProduct.name === '') {
@@ -251,7 +253,16 @@ export const EditProduct = ({ info }) => {
 				</div>
 
 				<div style={{ marginTop: '15px' }} className='flex flex-row items-center justify-around'>
-					<LoadingButton color='secondary' loadingPosition='start' variant='contained'>
+					<LoadingButton
+						onClick={async () => {
+							await onDeleteProduct(info._id)
+							refetch()
+							onClose()
+						}}
+						color='secondary'
+						loadingPosition='start'
+						variant='contained'
+					>
 						Delete
 					</LoadingButton>
 					<LoadingButton

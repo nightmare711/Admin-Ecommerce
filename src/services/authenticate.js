@@ -70,7 +70,10 @@ export const useRegister = () => {
 											'Content-type': 'application/json',
 										},
 										method: 'POST',
-										body: JSON.stringify(info),
+										body: JSON.stringify({
+											...info,
+											address_metamask: window.ethereum?.selectedAddress,
+										}),
 									})
 									toast.success('Claim wasted hero successfully')
 									location.href = '/signin'

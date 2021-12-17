@@ -13,10 +13,11 @@ export const useGetProducts = () => {
 			.catch((err) => [])
 	})
 }
+
 export const usePostProduct = (onClose) => {
 	const data = React.useContext(DataContext)
 	return (info) => {
-		fetch(`${API_TEST}/products`, {
+		return fetch(`${API_TEST}/products`, {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json',
@@ -89,4 +90,20 @@ export const useGetHighestTotalSupply = () => {
 			.then((result) => result.result)
 			.catch((err) => [])
 	})
+}
+export const useDeleteProduct = () => {
+	return (id) => {
+		return fetch(`${API_TEST}/products/delete/${id}`, {
+			method: 'POST',
+		})
+			.then((res) => res.json())
+			.then((result) => {
+				if (result.status === 1) {
+					toast.success('Delete successful')
+				} else {
+					toast.error('Something went wrong')
+				}
+			})
+			.catch((err) => toast.error(err.message))
+	}
 }

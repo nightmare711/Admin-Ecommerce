@@ -8,7 +8,7 @@ import { toBase64 } from 'services/utils/utils'
 import { toast } from 'react-toastify'
 import './FormOverlay.css'
 
-export const FormOverlay = () => {
+export const FormOverlay = ({ refetch }) => {
 	const [infoProduct, setInfoProduct] = React.useState({
 		name: '',
 		product_type: '',
@@ -234,7 +234,12 @@ export const FormOverlay = () => {
 				</div>
 
 				<div style={{ marginTop: '15px' }} className='flex flex-row items-center justify-around'>
-					<LoadingButton color='secondary' loadingPosition='start' variant='contained'>
+					<LoadingButton
+						onClick={() => onMoveAnimation('create-product', 'moveOutOpacity')}
+						color='secondary'
+						loadingPosition='start'
+						variant='contained'
+					>
 						Cancel
 					</LoadingButton>
 					<LoadingButton
@@ -242,10 +247,11 @@ export const FormOverlay = () => {
 						// loading={loading}
 						loadingPosition='end'
 						variant='contained'
-						onClick={() => {
+						onClick={async () => {
 							const isError = onValidate()
 							if (!isError) {
-								onAddProduct(infoProduct)
+								await onAddProduct(infoProduct)
+								refetch()
 							}
 						}}
 					>

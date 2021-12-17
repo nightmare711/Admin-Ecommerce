@@ -46,6 +46,7 @@ export const Signin = () => {
 						label='Password'
 						variant='filled'
 						color='secondary'
+						type='password'
 						error={error.password}
 						onChange={(e) => setInfo({ ...info, password: e.target.value })}
 					/>

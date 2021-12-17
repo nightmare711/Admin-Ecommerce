@@ -8,12 +8,12 @@ import { EditProduct } from './components/EditProduct'
 import './Products.css'
 
 export const Products = () => {
-	const { data: products } = useGetProducts()
+	const { data: products, refetch } = useGetProducts()
 	const [editProduct, setEditProduct] = React.useState(null)
 	return (
 		<div className='products'>
-			<FormOverlay />
-			<EditProduct info={editProduct} />
+			<FormOverlay refetch={refetch} />
+			<EditProduct info={editProduct} refetch={refetch} />
 			<div className='flex flex-row items-center justify-between dashboard__header'>
 				<HeaderPage title='Products' route='Products' />
 				<div className='flex flex-row items-center btn-container'>

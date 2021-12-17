@@ -26,7 +26,7 @@ body {
   color:white;
 }
 .btn-secondary {
-  width: 100px;
+  width: 150px;
   padding: 10px 0px;
   background-color: #eb6f33;
   display: flex;
@@ -38,6 +38,13 @@ body {
   border: 1px solid #eb6f33;
   transition: all .3s;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-secondary.disabled {
+  pointer-events: none;
+  opacity: 0.4;
 }
 .btn-secondary:hover {
   background-color: transparent;
