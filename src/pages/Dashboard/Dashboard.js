@@ -162,6 +162,7 @@ export const Dashboard = () => {
 	const { data: highestPrice } = useGetHighestPrice()
 	const { data: highesSupply } = useGetHighestTotalSupply()
 	const { data: orders } = useGetOrderByOwner()
+	console.log('orders:', orders)
 	const [infoOrder, setInfoOrder] = React.useState(null)
 	const { data: totalFund, refetch: refetchGetFund } = useGetTotalInFund()
 	const requestWithdraw = useWithdraw()
