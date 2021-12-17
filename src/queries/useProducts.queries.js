@@ -6,12 +6,18 @@ import { toast } from 'react-toastify'
 
 export const useGetProducts = () => {
 	const data = React.useContext(DataContext)
-	return useQuery(['useGetProducts.name'], () => {
-		return fetch(`${API_TEST}/products/owner/${data.user._id}`)
-			.then((res) => res.json())
-			.then((result) => result.result)
-			.catch((err) => [])
-	})
+	return useQuery(
+		['useGetProducts.name'],
+		() => {
+			return fetch(`${API_TEST}/products/owner/${data.user._id}`)
+				.then((res) => res.json())
+				.then((result) => result.result)
+				.catch((err) => [])
+		},
+		{
+			refetchInterval: 2000,
+		}
+	)
 }
 
 export const usePostProduct = (onClose) => {
