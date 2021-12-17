@@ -31,7 +31,7 @@ export const OrderOverlay = ({ order }) => {
 					</div>
 				</div>
 				<div className='border'>
-					<img src={order?.image} alt='Product' />
+					<img className='product-img' src={order?.image} alt='Product' />
 				</div>
 			</div>
 		</div>

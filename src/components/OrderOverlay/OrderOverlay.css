@@ -29,7 +29,7 @@
   padding: 5px;
   border: 1px solid white;
 }
-img {
+.product-img {
   margin: auto;
   object-fit: cover;
   width: 100%;
