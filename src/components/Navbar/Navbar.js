@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Logo from 'assets/logo.png'
 import SearchIcon from '@mui/icons-material/Search'
 import NotificationsIcon from '@mui/icons-material/Notifications'
-import { useLogout } from 'services/authenticate'
 import { Link } from 'react-router-dom'
+import { DataContext } from 'context/DataContext'
 import './Navbar.css'
 
 export const Navbar = () => {
-	const logout = useLogout()
+	const data = useContext(DataContext)
 	return (
 		<div className='flex flex-row items-center justify-between w-full max-w-screen-xl navbar'>
 			<img className='navbar__logo' src={Logo} alt='Logo' />
@@ -25,7 +25,7 @@ export const Navbar = () => {
 							<Link to='/profile'>
 								<li>Profile</li>
 							</Link>
-							<li onClick={() => logout()}>Logout</li>
+							<li onClick={() => data.setUser(null)}>Logout</li>
 						</ul>
 					</div>
 				</div>

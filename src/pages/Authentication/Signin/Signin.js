@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { TextField, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { useLogin } from 'services/authenticate'
+import { DataContext } from 'context/DataContext'
 import './Signin.css'
 
+const adminAccount = {
+	username: 'admin',
+	password: '123456',
+}
+
 export const Signin = () => {
-	const login = useLogin()
+	const data = useContext(DataContext)
 	const [info, setInfo] = React.useState({
 		username: '',
 		password: '',
@@ -66,7 +71,12 @@ export const Signin = () => {
 							}
 							setError(errorTemp)
 							if (!errorTemp.username && !errorTemp.password) {
-								login(info)
+								if (
+									info.username === adminAccount.username &&
+									info.password === adminAccount.password
+								) {
+									data.setUser(info)
+								}
 							}
 						}}
 						size='large'

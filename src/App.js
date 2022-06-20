@@ -13,7 +13,6 @@ import React from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 function App() {
 	const data = React.useContext(DataContext)
-	console.log(data.user)
 	if (!data.user) {
 		return (
 			<>
